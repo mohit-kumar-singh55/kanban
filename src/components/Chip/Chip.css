@@ -1,0 +1,17 @@
+.chip{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 40px;
+    font-size: 14px;
+    background-color: gray;
+    color: whitesmoke;
+    width: fit-content;
+}
+
+.chip svg{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
