@@ -27,3 +27,24 @@
 .card:hover .card_top svg{
     opacity: 1;
 }
+
+.card_title{
+    font-weight: bold;
+}
+
+.card_footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card_footer p{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.card_footer svg{
+    height: 18px;
+    width: 18px;
+}

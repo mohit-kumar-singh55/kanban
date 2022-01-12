@@ -1,5 +1,5 @@
 import React from 'react'
-import { MoreHorizontal } from 'react-feather';
+import { CheckSquare, Clock, MoreHorizontal } from 'react-feather';
 import Chip from '../Chip/Chip';
 import './Card.css';
 
@@ -13,7 +13,11 @@ function Card() {
                 <MoreHorizontal />
             </div>
             <div className="card_title">
-                
+                kdsjfj f sdf
+            </div>
+            <div className="card_footer">
+                <p><Clock />15 sept</p>
+                <p><CheckSquare /> 1/4 </p>
             </div>
         </div>
     )

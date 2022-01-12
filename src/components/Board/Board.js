@@ -1,6 +1,7 @@
 import React from 'react'
 import { MoreHorizontal } from 'react-feather'
 import Card from '../Card/Card'
+import Editable from '../Editable/Editable'
 import "./Board.css"
 
 function Board() {
@@ -12,8 +13,12 @@ function Board() {
                 </p>
                 <MoreHorizontal />
             </div>
-            <div className="board_cards">
+            <div className="board_cards custom-scroll">
                 <Card />
+                <Editable 
+                displayClass="board_cards_add"
+                text="Add Card"
+                placeholder="Enter Card Title" />
             </div>
         </div>
     )
