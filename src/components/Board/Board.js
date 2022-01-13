@@ -5,14 +5,15 @@ import DropDown from '../DropDown/DropDown'
 import Editable from '../Editable/Editable'
 import "./Board.css"
 
-function Board() {
+function Board(props) {
     const [showDropDown, setShowDropDown] = useState(false);
 
     return (
         <div className='board'>
             <div className="board_top">
                 <p className="board_top_title">
-                    To Do<span>2</span>
+                    {/* "?." is a channing operator, if the board is not present it will not go any further and return */}
+                    {props.board?.title}<span>{props.board?.cards?.length}</span>
                 </p>
                 <div className="board_top_more" onClick={() => setShowDropDown(true)}>
                     <MoreHorizontal />
@@ -24,7 +25,9 @@ function Board() {
                 </div>
             </div>
             <div className="board_cards custom-scroll">
-                <Card />
+                {props.board?.cards?.map((item) => (
+                    <Card key={item.id} card={item} />
+                ))}
                 <Editable
                     displayClass="board_cards_add"
                     text="Add Card"

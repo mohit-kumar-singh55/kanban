@@ -4,14 +4,16 @@ import Chip from '../Chip/Chip';
 import DropDown from '../DropDown/DropDown';
 import './Card.css';
 
-function Card() {
-    const [showDropDown,setShowDropDown] = useState(false);
+function Card(props) {
+    const [showDropDown, setShowDropDown] = useState(false);
 
     return (
         <div className='card'>
             <div className="card_top">
                 <div className="card_top_labels">
-                    <Chip text="Frontend" color="violet" />
+                    {props.card?.labels?.map((item, index) => (
+                        <Chip key={index} text={item.text} color={item.color} />
+                    ))}
                 </div>
                 <div className="card_top_more" onClick={() => setShowDropDown(true)}>
                     <MoreHorizontal />
@@ -23,10 +25,12 @@ function Card() {
                 </div>
             </div>
             <div className="card_title">
-                kdsjfj f sdf
+                {props.card?.title}
             </div>
             <div className="card_footer">
-                <p><Clock />15 sept</p>
+                {props.card?.date &&
+                    <p><Clock />{props.card?.date}</p>
+                }
                 <p><CheckSquare /> 1/4 </p>
             </div>
         </div>
