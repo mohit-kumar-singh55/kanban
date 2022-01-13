@@ -10,6 +10,25 @@
     display: flex;
 }
 
+.board_top_more{
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.board_top_more:hover{
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.board_dropdown{
+    width: 130px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.1);
+}
+
 .board_top_title{
     flex: 1;
     display: flex;

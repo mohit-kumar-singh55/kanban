@@ -1,6 +1,7 @@
 import React from "react";
 import './App.css';
 import Board from "./components/Board/Board";
+import Editable from "./components/Editable/Editable";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
         <div className="app_boards">
           <Board />
           <Board />
-          <Board />
-          <Board />
+          <div className="add_boards_board">
+            <Editable displayClass="add_boards_board_add" text="Add Board" placeholder="Enter board title" />
+          </div>
         </div>
       </div>
     </div>

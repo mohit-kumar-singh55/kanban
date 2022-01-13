@@ -1,4 +1,4 @@
-.card{
+.card {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -7,44 +7,63 @@
     border-radius: 5px;
 }
 
-.card_top{
+.card_top {
     display: flex;
     gap: 5px;
 }
 
-.card_top_labels{
+.card_top_more {
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card_top_more:hover {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.card_dropdown {
+    width: 130px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.card_top_labels {
     flex: 1;
     display: flex;
     gap: 10px;
 }
 
-.card_top svg{
+.card_top svg {
     opacity: 0;
     transition: 0.3s;
     cursor: pointer;
 }
 
-.card:hover .card_top svg{
+.card:hover .card_top svg {
     opacity: 1;
 }
 
-.card_title{
+.card_title {
     font-weight: bold;
 }
 
-.card_footer{
+.card_footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.card_footer p{
+.card_footer p {
     display: flex;
     gap: 5px;
     align-items: center;
 }
 
-.card_footer svg{
+.card_footer svg {
     height: 18px;
     width: 18px;
 }
