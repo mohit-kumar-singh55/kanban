@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Activity, Calendar, List, Tag, Type } from 'react-feather';
+import { Activity, Calendar, List, Tag, Trash2, Type } from 'react-feather';
 import Editable from '../../Editable/Editable';
 import Modal from '../../Modal/Modal';
 import "./CardInfo.css";
@@ -76,6 +76,20 @@ function CardInfo(props) {
                     </div>
                     <div className="cardinfo_box_progress-bar">
                         <div className="cardinfo_box_progress" style={{width:"30%"}} />
+                    </div>
+                    <div className="cardinfo_box_list">
+                        <div className="cardinfo_task">
+                            <input type="checkbox" />
+                            <p>Task 1</p>
+                            <Trash2 />
+                        </div>
+                    </div>
+                    <div className="cardinfo_box_list">
+                        <div className="cardinfo_task">
+                            <input type="checkbox" />
+                            <p>Task 2</p>
+                            <Trash2 />
+                        </div>
                     </div>
                     <div className="cardinfo_box_body">
                         <Editable text={"Add Task"} placeholder="Enter Task" buttonText="Set Task" />

@@ -69,3 +69,28 @@
 .cardinfo_box_progress-active{
     background-color: limegreen;
 }
+
+.cardinfo_box_list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cardinfo_task{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.cardinfo_task p{
+    line-height: 20px;
+    flex: 1;
+}
+
+.cardinfo_task svg,
+.cardinfo_task input{
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
