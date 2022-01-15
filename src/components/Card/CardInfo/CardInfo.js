@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Activity, Calendar, List, Tag, Trash2, Type } from 'react-feather';
 import Editable from '../../Editable/Editable';
 import Modal from '../../Modal/Modal';
+import Chip from "../../Chip/Chip";
 import "./CardInfo.css";
 
 function CardInfo(props) {
@@ -17,6 +18,14 @@ function CardInfo(props) {
 
     const [activeColor, setActiveColor] = useState("");
 
+    const { title, labels, desc, date, tasks } = props.card;
+
+    const calculatePercent = () => {
+        if (tasks?.length === 0) return 0;
+        const completed = tasks?.filter(item => item.completed)?.length;
+
+        return (completed / tasks?.length) * 100 + "";
+    }
 
     return (
         <Modal onClose={() => props.onClose()}>
@@ -27,7 +36,7 @@ function CardInfo(props) {
                         Title
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable text={"Hello"} placeholder="Enter Title" buttonText="Set Title" />
+                        <Editable text={title} placeholder="Enter Title" buttonText="Set Title" />
                     </div>
                 </div>
 
@@ -37,7 +46,7 @@ function CardInfo(props) {
                         Description
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable text={"Your description"} placeholder="Enter Description" buttonText="Set Description" />
+                        <Editable text={desc} placeholder="Enter Description" buttonText="Set Description" />
                     </div>
                 </div>
 
@@ -47,7 +56,7 @@ function CardInfo(props) {
                         Date
                     </div>
                     <div className="cardinfo_box_body">
-                        <input type="date" />
+                        <input type="date" defaultValue={date ? new Date(date).toISOString().substring(0, 10) : ""} />
                     </div>
                 </div>
 
@@ -55,6 +64,16 @@ function CardInfo(props) {
                     <div className="cardinfo_box_title">
                         <Tag />
                         Labels
+                    </div>
+                    <div className="cardinfo_box_labels">
+                        {
+                            labels?.map((item, index) => (
+                                <Chip close
+                                    onClose={() => console.log("Closing...")}
+                                    key={item.text + index}
+                                    color={item.color}
+                                    text={item.text} />))
+                        }
                     </div>
                     <div className="cardinfo_box_colors">
                         {
@@ -75,21 +94,18 @@ function CardInfo(props) {
                         Tasks
                     </div>
                     <div className="cardinfo_box_progress-bar">
-                        <div className="cardinfo_box_progress" style={{width:"30%"}} />
+                        <div className="cardinfo_box_progress" style={{ width: calculatePercent() + "%" }} />
                     </div>
                     <div className="cardinfo_box_list">
-                        <div className="cardinfo_task">
-                            <input type="checkbox" />
-                            <p>Task 1</p>
-                            <Trash2 />
-                        </div>
-                    </div>
-                    <div className="cardinfo_box_list">
-                        <div className="cardinfo_task">
-                            <input type="checkbox" />
-                            <p>Task 2</p>
-                            <Trash2 />
-                        </div>
+                        {
+                            tasks?.map((item) => (
+                                <div key={item.id} className="cardinfo_task">
+                                    <input type="checkbox" defaultValue={item.completed} />
+                                    <p>{item.text}</p>
+                                    <Trash2 />
+                                </div>))
+                        }
+
                     </div>
                     <div className="cardinfo_box_body">
                         <Editable text={"Add Task"} placeholder="Enter Task" buttonText="Set Task" />
