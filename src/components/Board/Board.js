@@ -30,7 +30,8 @@ function Board(props) {
                         removeCard={(cid, bid) => props.removeCard(cid, bid)}
                         boardId={props.board?.id}
                         handleDragEnter={(cid, bid) => props.handleDragEnter(cid, bid)}
-                        handleDragEnd={(cid, bid) => props.handleDragEnd(cid, bid)} />
+                        handleDragEnd={(cid, bid) => props.handleDragEnd(cid, bid)}
+                        updateCard={props.updateCard} />
                 ))}
                 <Editable
                     displayClass="board_cards_add"

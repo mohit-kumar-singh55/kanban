@@ -11,7 +11,11 @@ function Card(props) {
 
     return (
         <>
-            {showModal && <CardInfo card={props.card} onClose={() => setShowModal(false)} />}
+            {showModal && <CardInfo
+                updateCard={props.updateCard}
+                boardId={props.boardId}
+                card={props.card}
+                onClose={() => setShowModal(false)} />}
 
             <div className='card' draggable
                 onDragEnd={() => props.handleDragEnd(props.card?.id, props.boardId)}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Activity, Calendar, List, Tag, Trash2, Type } from 'react-feather';
 import Editable from '../../Editable/Editable';
 import Modal from '../../Modal/Modal';
@@ -18,14 +18,55 @@ function CardInfo(props) {
 
     const [activeColor, setActiveColor] = useState("");
 
-    const { title, labels, desc, date, tasks } = props.card;
+    const [values, setValues] = useState({ ...props.card });
 
     const calculatePercent = () => {
-        if (tasks?.length === 0) return 0;
-        const completed = tasks?.filter(item => item.completed)?.length;
+        if (values.tasks?.length === 0) return 0;
+        const completed = values.tasks?.filter(item => item.completed)?.length;
 
-        return (completed / tasks?.length) * 100 + "";
+        return (completed / values.tasks?.length) * 100 + "";
     }
+
+    const addLabel = (value, color) => {
+        const index = values.labels?.findIndex(item => item.text === value);
+        if (index > -1) return;
+
+        const label = {
+            text: value,
+            color
+        }
+        setValues({ ...values, labels: [...values.labels, label] });
+        setActiveColor("");
+    }
+
+    const removeLabel = (text) => {
+        const index = values.labels?.findIndex(item => item.text === text);
+        if (index < 0) return;
+
+        setValues({ ...values, labels: values.labels?.filter((item) => item.text !== text) });
+    }
+
+    const addTask = (value) => {
+        const task = {
+            id: Date.now() + Math.random() * 2,
+            text: value,
+            completed: false
+        }
+
+        setValues({ ...values, tasks: [...values.tasks, task] });
+    }
+
+    const removeTask = (id) => {
+        const index = values.tasks?.findIndex(item => item.id === id);
+        if (index < 0) return;
+
+        setValues({ ...values, tasks: values.tasks?.filter(item => item.id !== id) });
+    }
+
+    useEffect(() => {
+        props.updateCard(props.card.id, props.boardId, values);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values])
 
     return (
         <Modal onClose={() => props.onClose()}>
@@ -36,7 +77,7 @@ function CardInfo(props) {
                         Title
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable text={title} placeholder="Enter Title" buttonText="Set Title" />
+                        <Editable onSubmit={(value) => setValues({ ...values, title: value })} text={values.title} placeholder="Enter Title" buttonText="Set Title" />
                     </div>
                 </div>
 
@@ -46,7 +87,7 @@ function CardInfo(props) {
                         Description
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable text={desc} placeholder="Enter Description" buttonText="Set Description" />
+                        <Editable onSubmit={(value) => setValues({ ...values, desc: value })} text={values.desc} placeholder="Enter Description" buttonText="Set Description" />
                     </div>
                 </div>
 
@@ -56,7 +97,7 @@ function CardInfo(props) {
                         Date
                     </div>
                     <div className="cardinfo_box_body">
-                        <input type="date" defaultValue={date ? new Date(date).toISOString().substring(0, 10) : ""} />
+                        <input type="date" onChange={(e) => setValues({ ...values, date: e.target.value })} defaultValue={values.date ? new Date(values.date).toISOString().substring(0, 10) : ""} />
                     </div>
                 </div>
 
@@ -67,12 +108,12 @@ function CardInfo(props) {
                     </div>
                     <div className="cardinfo_box_labels">
                         {
-                            labels?.map((item, index) => (
+                            values.labels?.map((item, index) => (
                                 <Chip close
-                                    onClose={() => console.log("Closing...")}
                                     key={item.text + index}
                                     color={item.color}
-                                    text={item.text} />))
+                                    text={item.text}
+                                    onClose={() => removeLabel(item.text)} />))
                         }
                     </div>
                     <div className="cardinfo_box_colors">
@@ -84,7 +125,7 @@ function CardInfo(props) {
                         }
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable text={"Add Labels"} placeholder="Enter Label" buttonText="Set Label" />
+                        <Editable onSubmit={(value) => addLabel(value, activeColor)} text={"Add Labels"} placeholder="Enter Label" buttonText="Set Label" />
                     </div>
                 </div>
 
@@ -98,17 +139,17 @@ function CardInfo(props) {
                     </div>
                     <div className="cardinfo_box_list">
                         {
-                            tasks?.map((item) => (
+                            values.tasks?.map((item) => (
                                 <div key={item.id} className="cardinfo_task">
                                     <input type="checkbox" defaultValue={item.completed} />
                                     <p>{item.text}</p>
-                                    <Trash2 />
+                                    <Trash2 onClick={() => removeTask(item.id)} />
                                 </div>))
                         }
 
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable text={"Add Task"} placeholder="Enter Task" buttonText="Set Task" />
+                        <Editable onSubmit={(value) => addTask(value)} text={"Add Task"} placeholder="Enter Task" buttonText="Set Task" />
                     </div>
                 </div>
             </div>

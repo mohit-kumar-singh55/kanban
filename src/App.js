@@ -117,6 +117,18 @@ function App() {
     setBoards(tempBoards);
   }
 
+  const updateCard = (cid, bid, card) => {
+    const bIndex = boards.findIndex(item => (item.id === bid));
+    if (bIndex < 0) return;
+
+    const cIndex = boards[bIndex].cards.findIndex(item => (item.id === cid));
+    if (cIndex < 0) return;
+
+    const tempBoards = [...boards];
+    tempBoards[bIndex].cards[cIndex] = card;
+    setBoards(tempBoards);
+  }
+
   return (
     <div className="app">
       <div className="app_navbar">
@@ -130,7 +142,8 @@ function App() {
               addCard={(title, bid) => addCard(title, bid)}
               removeCard={(cid, bid) => removeCard(cid, bid)}
               handleDragEnter={(cid, bid) => handleDragEnter(cid, bid)}
-              handleDragEnd={(cid, bid) => handleDragEnd(cid, bid)} />
+              handleDragEnd={(cid, bid) => handleDragEnd(cid, bid)}
+              updateCard={updateCard} />
           ))}
           <div className="add_boards_board">
             <Editable onSubmit={(value) => addBoard(value)} displayClass="add_boards_board_add" text="Add Board" placeholder="Enter board title" />
