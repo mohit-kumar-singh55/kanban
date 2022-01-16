@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import Board from "./components/Board/Board";
 import Editable from "./components/Editable/Editable";
@@ -10,34 +10,34 @@ function App() {
   })
 
   const [boards, setBoards] = useState([
-    {
-      id: Date.now() + Math.random() * 2,
-      title: "To Do",
-      cards: [
-        {
-          id: Date.now() + Math.random() * 2,
-          title: "Card 1",
-          tasks: [],
-          labels: [{
-            text: "FrontEnd",
-            color: "blue"
-          }],
-          desc: "dkslkfjks dfh",
-          date: ""
-        },
-        {
-          id: Date.now() + Math.random() * 2,
-          title: "Card 2",
-          tasks: [],
-          labels: [{
-            text: "BackEnd",
-            color: "brown"
-          }],
-          desc: "dkslkfjks dfh",
-          date: ""
-        },
-      ]
-    }
+    // {
+    //   id: Date.now() + Math.random() * 2,
+    //   title: "To Do",
+    //   cards: [
+    //     {
+    //       id: Date.now() + Math.random() * 2,
+    //       title: "Card 1",
+    //       tasks: [],
+    //       labels: [{
+    //         text: "FrontEnd",
+    //         color: "blue"
+    //       }],
+    //       desc: "dkslkfjks dfh",
+    //       date: ""
+    //     },
+    //     {
+    //       id: Date.now() + Math.random() * 2,
+    //       title: "Card 2",
+    //       tasks: [],
+    //       labels: [{
+    //         text: "BackEnd",
+    //         color: "brown"
+    //       }],
+    //       desc: "dkslkfjks dfh",
+    //       date: ""
+    //     },
+    //   ]
+    // }
   ])
 
   const addCard = (title, bid) => {
@@ -128,6 +128,11 @@ function App() {
     tempBoards[bIndex].cards[cIndex] = card;
     setBoards(tempBoards);
   }
+
+  // This is to store the board informations in localstorage
+  useEffect(() => {
+    localStorage.setItem("kanban", JSON.stringify(boards));
+  }, [boards])
 
   return (
     <div className="app">

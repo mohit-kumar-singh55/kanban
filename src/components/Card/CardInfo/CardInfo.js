@@ -96,7 +96,7 @@ function CardInfo(props) {
                         Description
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable onSubmit={(value) => setValues({ ...values, desc: value })} text={values.desc} placeholder="Enter Description" buttonText="Set Description" />
+                        <Editable onSubmit={(value) => setValues({ ...values, desc: value })} text={values.desc || "Add Description"} placeholder="Enter Description" buttonText="Set Description" />
                     </div>
                 </div>
 
