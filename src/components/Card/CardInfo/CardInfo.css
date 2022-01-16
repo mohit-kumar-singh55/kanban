@@ -64,6 +64,11 @@
     height: 10px;
     border-radius: 20px;
     background-color: #1379ec;
+    transition: 0.3s;
+}
+
+.cardinfo_box_progress-less{
+    background-color: crimson;
 }
 
 .cardinfo_box_progress-active{

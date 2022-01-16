@@ -63,6 +63,15 @@ function CardInfo(props) {
         setValues({ ...values, tasks: values.tasks?.filter(item => item.id !== id) });
     }
 
+    const updateTask = (id, completed) => {
+        const index = values.tasks?.findIndex(item => item.id === id);
+        if (index < 0) return;
+
+        const tempTasks = [...values.tasks];
+        tempTasks[index].completed = completed;
+        setValues({ ...values, tasks: tempTasks });
+    }
+
     useEffect(() => {
         props.updateCard(props.card.id, props.boardId, values);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -135,13 +144,15 @@ function CardInfo(props) {
                         Tasks
                     </div>
                     <div className="cardinfo_box_progress-bar">
-                        <div className="cardinfo_box_progress" style={{ width: calculatePercent() + "%" }} />
+                        <div className={`cardinfo_box_progress ${calculatePercent() < "50" ? "cardinfo_box_progress-less" : ""} ${calculatePercent() === "100" ? "cardinfo_box_progress-active" : ""}`}
+                            style={{ width: calculatePercent() + "%" }} />
                     </div>
                     <div className="cardinfo_box_list">
                         {
                             values.tasks?.map((item) => (
                                 <div key={item.id} className="cardinfo_task">
-                                    <input type="checkbox" defaultValue={item.completed} />
+                                    <input type="checkbox" defaultValue={item.completed}
+                                        onChange={(e) => updateTask(item.id, e.target.checked)} />
                                     <p>{item.text}</p>
                                     <Trash2 onClick={() => removeTask(item.id)} />
                                 </div>))

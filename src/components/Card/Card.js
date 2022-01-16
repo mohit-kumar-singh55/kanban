@@ -44,7 +44,9 @@ function Card(props) {
                     {props.card?.date &&
                         <p><Clock />{props.card?.date}</p>
                     }
-                    <p><CheckSquare /> 1/4 </p>
+                    {props.card?.tasks?.length > 0 && (
+                        <p><CheckSquare /> {props.card?.tasks?.filter(item => item.completed).length}/{props.card?.tasks?.length} </p>
+                    )}
                 </div>
             </div>
         </>
