@@ -9,7 +9,7 @@ function App() {
     bid: ""
   })
 
-  const [boards, setBoards] = useState([
+  const [boards, setBoards] = useState(JSON.parse(localStorage.getItem("kanban")) || [
     // {
     //   id: Date.now() + Math.random() * 2,
     //   title: "To Do",
