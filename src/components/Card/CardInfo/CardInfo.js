@@ -86,7 +86,7 @@ function CardInfo(props) {
                         Title
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable onSubmit={(value) => setValues({ ...values, title: value })} text={values.title} placeholder="Enter Title" buttonText="Set Title" />
+                        <Editable displayClass="cardinfo_editable" onSubmit={(value) => setValues({ ...values, title: value })} text={values.title} placeholder="Enter Title" buttonText="Set Title" />
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@ function CardInfo(props) {
                         Description
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable onSubmit={(value) => setValues({ ...values, desc: value })} text={values.desc || "Add Description"} placeholder="Enter Description" buttonText="Set Description" />
+                        <Editable displayClass="cardinfo_editable" onSubmit={(value) => setValues({ ...values, desc: value })} text={values.desc || "Add Description"} placeholder="Enter Description" buttonText="Set Description" />
                     </div>
                 </div>
 
@@ -134,7 +134,7 @@ function CardInfo(props) {
                         }
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable onSubmit={(value) => addLabel(value, activeColor)} text={"Add Labels"} placeholder="Enter Label" buttonText="Set Label" />
+                        <Editable displayClass="cardinfo_editable" onSubmit={(value) => addLabel(value, activeColor)} text={"Add Labels"} placeholder="Enter Label" buttonText="Set Label" />
                     </div>
                 </div>
 
@@ -160,7 +160,7 @@ function CardInfo(props) {
 
                     </div>
                     <div className="cardinfo_box_body">
-                        <Editable onSubmit={(value) => addTask(value)} text={"Add Task"} placeholder="Enter Task" buttonText="Set Task" />
+                        <Editable displayClass="cardinfo_editable" onSubmit={(value) => addTask(value)} text={"Add Task"} placeholder="Enter Task" buttonText="Set Task" />
                     </div>
                 </div>
             </div>

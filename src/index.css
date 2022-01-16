@@ -15,6 +15,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* added */
+  background: linear-gradient(135deg, rgba(23,156,138,0.33406866164434523) 0%, rgba(9,133,172,0.7206232834930848) 35%, rgba(81,169,247,0.45) 100%);
 }
 
 p{

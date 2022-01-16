@@ -20,10 +20,9 @@ function Card(props) {
             <div className='card' draggable
                 onDragEnd={() => props.handleDragEnd(props.card?.id, props.boardId)}
                 onDragEnter={() => props.handleDragEnter(props.card?.id, props.boardId)}
-                onClick={() => setShowModal(true)}
             >
                 <div className="card_top">
-                    <div className="card_top_labels">
+                    <div className="card_top_labels" onClick={() => setShowModal(true)}>
                         {props.card?.labels?.map((item, index) => (
                             <Chip key={index} text={item.text} color={item.color} />
                         ))}
@@ -37,10 +36,10 @@ function Card(props) {
                         </DropDown>}
                     </div>
                 </div>
-                <div className="card_title">
+                <div className="card_title" onClick={() => setShowModal(true)}>
                     {props.card?.title}
                 </div>
-                <div className="card_footer">
+                <div className="card_footer" onClick={() => setShowModal(true)}>
                     {props.card?.date &&
                         <p><Clock />{props.card?.date}</p>
                     }
