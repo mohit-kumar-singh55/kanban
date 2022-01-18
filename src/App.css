@@ -26,7 +26,7 @@
     width: 100%;
     padding: 20px 30px;
     border: 1px solid #ccc;
-    font-family: 'Ethnocentric Rg', sans-serif;
+    font-family: 'Ethnocentric Rg', sans-serif !important;
     text-align: center;
     user-select: none;
 }
