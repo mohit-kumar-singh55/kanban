@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Ethnocentric Rg';
     src: url('ethnocentric-rg.ttf') format('truetype');
+    font-display: swap;
 }
 
 .custom-scroll::-webkit-scrollbar{
